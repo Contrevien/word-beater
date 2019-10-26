@@ -201,6 +201,12 @@ function setHighScore() {
     document.getElementById("score").innerHTML = score.toString();
 }
 
+function decodeHtml(html) {
+    var textArea = document.createElement("textarea");
+    textArea.innerHTML = html;
+	return textArea.value;
+}
+
 input.oninput = function() {
     if (level === 0 && pointer === 0 && input.value.length === 1) {
         var timed = setInterval(clockHandler, 1000);
@@ -230,7 +236,7 @@ input.oninput = function() {
     document.getElementById("q3").classList.remove("q3c");
     document.getElementById("q4").classList.remove("q4c");
     document.getElementsByClassName("bouncy")[0].classList.remove("bounce");
-    if (input.value === words[level][pointer]) {
+    if (input.value === decodeHtml(words[level][pointer])) {
         setColors();
         setScore();
         if (level === 0 && pointer >=19 && pointer != 29)
